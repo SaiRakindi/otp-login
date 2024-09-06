@@ -29,11 +29,24 @@ const OTPInput = ({ length, handleOTPSubmit }) => {
     const combinedOTP = newOTP.join("");
 
     if (combinedOTP.length === length) handleOTPSubmit(combinedOTP, newOTP);
+
+    if (value && index < length - 1 && inputRefs.current[index + 1]) {
+      inputRefs.current[index + 1].focus();
+    }
   };
 
   const handleClick = (index) => {};
 
-  const handlekeyDown = () => {};
+  const handlekeyDown = (index, event) => {
+    if (
+      event.key === "Backspace" &&
+      !OTP[index] &&
+      index > 0 &&
+      inputRefs.current[index - 1]
+    ) {
+      inputRefs.current[index - 1].focus();
+    }
+  };
 
   return (
     <div>
